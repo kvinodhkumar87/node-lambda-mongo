@@ -1,0 +1,30 @@
+service: node-lambda-mongo
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+functions:
+  addDomain:
+    handler: handler.addUser
+    events:
+      - http:
+          path: add
+          method: post
+          cors: true
+
+  deleteDomain:
+    handler: handler.deleteUser
+    events:
+      - http:
+          path: delete/{email}
+          method: delete
+          cors: true
+
+  check:
+    handler: handler.findUser
+    events:
+      - http:
+          path: check/{email}
+          method: get
+          cors: true
